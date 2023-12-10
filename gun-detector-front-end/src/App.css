@@ -1,0 +1,87 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34 ;
+}
+
+.App-header {
+  background-color: #1a1b1f;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 40px;
+  border: none;
+  color: #fff;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button.start_recording {
+  background-color: rgb(20, 145, 22);
+}
+
+button.start_recording:hover {
+  background-color: rgb(24, 193, 26);
+}
+
+button.start_recording_disabled {
+  background-color: rgb(161, 161, 161);
+  cursor: not-allowed;
+}
+
+button.stop_recording {
+  background-color: rgb(193, 24, 24);
+}
+
+button.stop_recording:hover {
+  background-color: rgb(238, 31, 31);
+}
+
+button.download {
+  background-color: rgb(24, 137, 193);
+}
+
+button.download:hover {
+  background-color: rgb(30, 163, 230);
+}
+
+button.downloading {
+  background-color: rgb(30, 163, 230);
+  cursor: not-allowed;
+}
+
+button.capturing {
+  background-color: #d11616;
+  color: white;
+}
+
+button.disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.video-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.video {
+  width: 640px;
+  height: 480px;
+  border: 2px solid black;
+  display: block;
+}

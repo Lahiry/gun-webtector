@@ -1,24 +1,31 @@
-from flask import Flask, request, Response
-from flask_cors import CORS
+import cv2
+import imutils
 import imageio
 import tempfile
-import cv2
-import numpy as np
-import imutils
+from flask_cors import CORS
+from flask import Flask, request, Response
+from inference.models.utils import get_roboflow_model
 
 app = Flask(__name__)
 CORS(app)
 
-# Certifique-se de ter carregado um classificador Cascade para detecção de armas
-gun_cascade = cv2.CascadeClassifier('cascade.xml')
+# Get Roboflow model
+model_name = "the-monash-guns-dataset"
+model_version = "2"
+model_api_key = "bYVwWj1l7c1Nxhk2E2B9"
+model = get_roboflow_model(model_id="{}/{}".format(model_name, model_version), api_key=model_api_key)
 
 def detect_guns(frame):
-    frame = imutils.resize(frame, width=500)
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    guns = gun_cascade.detectMultiScale(gray, 1.3, 20, minSize=(100, 100))
+    # Run inference on the frame using the Roboflow model
+    results = model.infer(image=frame, confidence=0.5, iou_threshold=0.5)
 
-    for (x, y, w, h) in guns:
-        frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    if results[0]:
+        bounding_box = results[0][0]
+
+        x0, y0, x1, y1 = map(int, bounding_box[:4])
+        
+        frame = cv2.rectangle(frame, (x0, y0), (x1, y1), (255,255,0), 10)
+        frame = cv2.putText(frame, "Gun", (x0, y0 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 2)
 
     return frame
 
@@ -60,3 +67,4 @@ def process_video():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
