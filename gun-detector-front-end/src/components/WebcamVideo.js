@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 export function WebcamVideo() {
   const webcamRef = useRef(null);
@@ -8,9 +8,11 @@ export function WebcamVideo() {
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [downloading, setDownloading] = useState(false);
 
+  // Start capturing video
   const handleStartCaptureClick = () => {
     if (!downloading) {
       setCapturing(true);
+      setRecordedChunks([]);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: "video/webm",
       });
@@ -22,12 +24,14 @@ export function WebcamVideo() {
     }
   };
 
+  // Handle data available during recording
   const handleDataAvailable = ({ data }) => {
     if (data.size > 0) {
       setRecordedChunks((prev) => prev.concat(data));
     }
   };
 
+  // Stop capturing video
   const handleStopCaptureClick = () => {
     if (!downloading) {
       mediaRecorderRef.current.stop();
@@ -35,6 +39,7 @@ export function WebcamVideo() {
     }
   };
 
+  // Download recorded video with detections and detection graph image
   const handleDownload = async () => {
     if (recordedChunks.length && !downloading) {
       setDownloading(true);
@@ -47,11 +52,13 @@ export function WebcamVideo() {
       formData.append("video", blob);
 
       try {
+        // Fetch processed video
         const response_video = await fetch("http://localhost:5000/process_video", {
           method: "POST",
           body: formData,
         });
 
+        // Extract and download processed video
         const fileBlob_video = await response_video.blob();
         const url_video = URL.createObjectURL(fileBlob_video);
 
@@ -63,10 +70,12 @@ export function WebcamVideo() {
         a_video.click();
         window.URL.revokeObjectURL(url_video);
 
+        // Fetch detections graph image
         const response_img = await fetch("http://localhost:5000/get_graph", {
           method: "GET"
         });
 
+        // Extract and download detections graph image
         const fileBlob_img = await response_img.blob();
         const url_img = URL.createObjectURL(fileBlob_img);
 
@@ -78,19 +87,14 @@ export function WebcamVideo() {
         a_img.click();
         window.URL.revokeObjectURL(url_img);
 
+        // Reset recorded chunks
         setRecordedChunks([]);
       } finally {
+        // Reset downloading state
         setDownloading(false);
       }
     }
   };
-
-  // Disable start capture button while downloading
-  useEffect(() => {
-    if (downloading) {
-      setCapturing(false);
-    }
-  }, [downloading]);
 
   return (
     <>
