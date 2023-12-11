@@ -8,7 +8,7 @@
 
 [![Rafael Lahiry](https://github.com/Lahiry.png?size=60)](https://github.com/Lahiry "Rafael Lahiry on GitHub!")
 [![Guilherme Rameh](https://github.com/GuilhermeRameh.png?size=60)](https://github.com/GuilhermeRameh "Guilherme Rameh on GitHub!")
-[![Paulo Kim](https://github.com/.png?size=60)](https://github.com/ "Paulo Kim on GitHub!")
+[![Paulo Kim](https://github.com/paulokim1.png?size=60)](https://github.com/paulokim1 "Paulo Kim on GitHub!")
 
 ## Objetivo do Projeto❗
 
