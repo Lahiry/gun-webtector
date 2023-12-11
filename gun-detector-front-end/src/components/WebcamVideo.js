@@ -47,21 +47,36 @@ export function WebcamVideo() {
       formData.append("video", blob);
 
       try {
-        const response = await fetch("http://localhost:5000/process_video", {
+        const response_video = await fetch("http://localhost:5000/process_video", {
           method: "POST",
           body: formData,
         });
 
-        const fileBlob = await response.blob();
-        const url = URL.createObjectURL(fileBlob);
+        const fileBlob_video = await response_video.blob();
+        const url_video = URL.createObjectURL(fileBlob_video);
 
-        const a = document.createElement("a");
-        document.body.appendChild(a);
-        a.style = "display: none";
-        a.href = url;
-        a.download = "processed_video.webm";
-        a.click();
-        window.URL.revokeObjectURL(url);
+        const a_video = document.createElement("a");
+        document.body.appendChild(a_video);
+        a_video.style = "display: none";
+        a_video.href = url_video;
+        a_video.download = "processed_video.webm";
+        a_video.click();
+        window.URL.revokeObjectURL(url_video);
+
+        const response_img = await fetch("http://localhost:5000/get_graph", {
+          method: "GET"
+        });
+
+        const fileBlob_img = await response_img.blob();
+        const url_img = URL.createObjectURL(fileBlob_img);
+
+        const a_img = document.createElement("a");
+        document.body.appendChild(a_img);
+        a_img.style = "display: none";
+        a_img.href = url_img;
+        a_img.download = "detections_graph.png";
+        a_img.click();
+        window.URL.revokeObjectURL(url_img);
 
         setRecordedChunks([]);
       } finally {
