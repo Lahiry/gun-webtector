@@ -1,18 +1,20 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <p align="center">
-  <h2 align="center">📄Readme Projeto Computer Vision</h3>
-  <h3 align="center">Aplicação Web para Detecção de Armas em Tempo-Real</h4>
+  <h1 align="center">📄Readme Projeto Computer Vision</h1>
+  <h2 align="center">Gun-Webtector 🎯</h2>
+  <h3 align="center">Aplicação Web para Detecção de Armas em vídeos</h3>
+
 </p>
 
 ## Feito Por🙋
 
-[![Rafael Lahiry](https://github.com/Lahiry.png?size=60)](https://github.com/Lahiry "Rafael Lahiry on GitHub!")
+[![Raphael Lahiry](https://github.com/Lahiry.png?size=60)](https://github.com/Lahiry "Raphael Lahiry on GitHub!")
 [![Guilherme Rameh](https://github.com/GuilhermeRameh.png?size=60)](https://github.com/GuilhermeRameh "Guilherme Rameh on GitHub!")
 [![Paulo Kim](https://github.com/paulokim1.png?size=60)](https://github.com/paulokim1 "Paulo Kim on GitHub!")
 
 ## Objetivo do Projeto❗
 
-O projeto foi realizado com o objetivo de  criar uma aplicação web capaz de detectar em tempo real armas de fogo, salvar os timestamps de quando essas detecções foram realizadas, e por fim, ser capaz de baixar tanto o gráfico como a gravação.
+O projeto foi realizado com o objetivo de criar uma aplicação web capaz de detectar a presença de armas de fogo em vídeos, salvar os timestamps de quando essas detecções foram realizadas, e por fim, ser capaz de baixar tanto o gráfico como a gravação com as detecções.
 
 ## Rodando a Demonstração Localmente 💻
 ### Front End
